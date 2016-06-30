@@ -123,7 +123,7 @@ def crib_template(crib_mapping):
   return alphabet
 ~~~
 
-Given a wordlist such as `/usr/share/dict/american-english`, `find_cribs` identifies potential cribs embedded in the ciphertext and their plaintext->ciphertext letter mapping. For example, `find_cribs(words, ctxt, min_length=12)` identifies 'CLASSIFICATION' crib in the ciphertext. Combining all non-conflicting cribs (e.g. overlapping letters map to same values) exposes 15 plaintext -> ciphertext letter mappings, massively reducing the search space from 26! (~15 oktillion) to 11! (~3 million).
+Given a wordlist such as `/usr/share/dict/american-english`, `find_cribs` identifies potential cribs embedded in the ciphertext and their plaintext->ciphertext letter mapping. For example, `find_cribs(words, ctxt, min_length=12)` identifies 'CLASSIFICATION' crib in the ciphertext. Combining all non-conflicting cribs (e.g. overlapping letters map to same values) exposes 15 plaintext -> ciphertext letter mappings, massively reducing the search space from 26! (~15 oktillion) to 11! (~3 million). [Oren](https://github.com/OrenLeaffer) helped develop a better regex [here](Backpointer.md).
 
 ### Shotgun Optimization
 
@@ -131,4 +131,4 @@ Given a wordlist such as `/usr/share/dict/american-english`, `find_cribs` identi
 
 ### Word Extraction
 
-[Word Extraction](https://en.wikipedia.org/wiki/Text_segmentation#Word_segmentation) is the process of identifying words in the (partially) decrypted message. Since multiple words are (relatively) unlikely to occur at random, successfully extracting multiple words at the start of partially decrypted messages suggests a good candidate substitution alphabet. A prefix [trie](https://en.wikipedia.org/wiki/Trie) is a relatively simple optimization that avoids searching through every word in our wordlist to identify candidate words.
+[Word Extraction](https://en.wikipedia.org/wiki/Text_segmentation#Word_segmentation) is the process of identifying words in the (partially) decrypted message. Since multiple words are (relatively) unlikely to occur at random, successfully extracting multiple words at the start of partially decrypted messages suggests a good candidate substitution alphabet. A prefix [trie](https://en.wikipedia.org/wiki/Trie) is a relatively simple optimization that avoids searching through every word in our wordlist to identify candidate words. Greater fault-tolerance implemented [here](Word Extraction.md).
